@@ -26,4 +26,4 @@ jobs:
 
     - name: Run tests
       run: |
-        Rscript -e 'library(shinytest2); app <- AppDriver$new(); app$test()'
+        Rscript -e 'library('shinytest2'); app <- AppDriver$new(); app$test()'
