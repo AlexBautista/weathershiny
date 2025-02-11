@@ -1,0 +1,29 @@
+name: Shiny App Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  shinytest2:
+    runs-on: ubuntu-latest
+    name: Run Shiny app tests
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up R
+      uses: r-lib/actions/setup-r@v2
+
+    - name: Install dependencies
+      run: |
+        Rscript -e 'install.packages(c("shiny", "shinytest2", "mockery", "httr", "jsonlite"))'
+
+    - name: Run tests
+      run: |
+        Rscript -e 'library(shinytest2); app <- AppDriver$new(); app$test()'
